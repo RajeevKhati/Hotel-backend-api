@@ -15,12 +15,10 @@ router.get("/hotels", (req, res) => {
 
 //Post Route
 router.post("/hotels", (req, res) => {
-	console.log(req.body);
 	if(Object.keys(req.body).length === 0){
 		return res.status(400).json({message: "required content is missing"});
 	}
-	let newHotel = {name: req.body.name, location: req.body.location};
-	Hotel.create(newHotel, (err, createdHotel) => {
+	Hotel.create(req.body, (err, createdHotel) => {
 		if(err){
 			res.status(500).json(err);
 		}else{
@@ -34,7 +32,7 @@ router.put("/hotels/:id", (req, res) => {
 	if(Object.keys(req.body).length === 0){
 		return res.status(400).json({message: "required content is missing"});
 	}
-	let updatedHotel = {name: req.body.name, location: req.body.location};
+	let updatedHotel = req.body;
 	Hotel.findByIdAndUpdate(req.params.id, updatedHotel, (err, overridenHotel) => {
 		if(err){
 			res.status(500).json(err);

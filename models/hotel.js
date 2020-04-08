@@ -4,7 +4,7 @@ let hotelSchema = new mongoose.Schema({
 	name: String,
 	description: String,
 	location: String,
-	cost: {
+	costPerNight: {
 	  AC: Number,
 	  NonAC: Number
 	},
